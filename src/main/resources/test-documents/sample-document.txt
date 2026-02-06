@@ -1,0 +1,35 @@
+Product Documentation: AgentService Template
+
+Overview:
+The Spring Boot AgentService Template is a production-ready starter for building AI-powered applications.
+It uses the agentic-helper library with AgentService for multi-LLM orchestration.
+
+Key Features:
+- Multi-instance support: Configure multiple OpenAI, Azure OpenAI, and Azure Anthropic deployments
+- Rate limiting: Built-in token bucket algorithm prevents API rate limit errors
+- Structured outputs: Type-safe JSON responses with automatic schema generation
+- Conversation management: Multi-turn conversations with automatic history
+- Autonomous agents: Tool execution loop with reflection between calls
+- Async execution: CompletableFuture-based for high performance
+- Direct model usage: Use any model without agent registration
+
+Supported Models:
+- GPT-4o: Latest flagship model for complex reasoning
+- GPT-4o-mini: Fast and cost-effective for most tasks
+- Claude Sonnet 4.5: Advanced reasoning via Azure Anthropic
+- Text-embedding-3-small: 1536-dimension embeddings for semantic search
+- DALL-E 3: High-quality image generation
+
+Configuration:
+Set up your environment with LLM_INSTANCES JSON array in .env file.
+Each instance requires: id, url, key, models, provider, and apiVersion (for Azure).
+
+Stream Limits:
+Configure CONCURRENT_STREAM_LIMIT_PER_INSTANCE in .env file.
+Default is 15 concurrent streams per instance.
+
+Best Practices:
+- Use structured outputs for data extraction and classification
+- Implement proper error handling with retry logic
+- Clean up conversations after use (deleteConversation)
+- Monitor rate limits and adjust configuration as needed
