@@ -1,0 +1,73 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Java
+*.class
+*.log
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# VS Code
+.vscode/
+
+# Eclipse
+.settings/
+.project
+.classpath
+
+# macOS
+.DS_Store
+
+# Environment
+.env
+.env.local
+application-local.properties
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Work files (SQL, CSV, shell scripts at root)
+/*.sql
+/*.csv
+/*.sh
+
+# Frontend build
+frontend/node_modules/
+frontend/dist/
+
+# Docker
+.docker/
+
+# Claude Code local settings
+.claude/settings.local.json
+log.txt
+First_Prompt*.txt

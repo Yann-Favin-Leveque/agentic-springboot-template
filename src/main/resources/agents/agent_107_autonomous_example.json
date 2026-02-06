@@ -1,0 +1,50 @@
+{
+  "id": "107",
+  "name": "Autonomous Research Agent",
+  "model": "gpt-4o",
+  "temperature": 0.5,
+  "responseTimeout": 180000,
+  "resultClass": "DataAnalysisResult",
+  "maxTokens": 4096,
+  "autonomous": true,
+  "maxIterations": 10,
+  "maxToolTokenOutput": 2000,
+  "instructions": "You are an autonomous research agent that can use tools to complete tasks. When given a task:\n\n1. Plan your approach\n2. Use available tools to gather information\n3. Analyze the gathered data\n4. Call task_over with your structured result when done\n\nThink step by step and explain your reasoning between tool calls.",
+  "description": "Autonomous agent example with tool execution loop",
+  "functions": [
+    {
+      "name": "search_data",
+      "description": "Search for data matching a query",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max results to return"
+          }
+        },
+        "required": ["query"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "calculate",
+      "description": "Perform a mathematical calculation",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "expression": {
+            "type": "string",
+            "description": "Mathematical expression to evaluate"
+          }
+        },
+        "required": ["expression"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "100",
+  "name": "Example Agent",
+  "model": "gpt-4o",
+  "temperature": 0.7,
+  "responseTimeout": 60000,
+  "resultClass": "ResultClass",
+  "maxTokens": 4096,
+  "instructions": "You are a helpful AI assistant that provides clear and concise responses. When answering questions, be accurate, professional, and friendly. If you're unsure about something, admit it rather than making up information.",
+  "description": "A helpful AI assistant for answering questions"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "105",
+  "name": "Claude Test Agent",
+  "model": "claude-sonnet-4-5",
+  "temperature": 0.7,
+  "responseTimeout": 90000,
+  "maxTokens": 4096,
+  "instructions": "You are Claude, a helpful AI assistant created by Anthropic. Provide clear, concise, and accurate responses.",
+  "description": "Claude Sonnet test agent for Azure Anthropic"
+}

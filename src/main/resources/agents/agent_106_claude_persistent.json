@@ -1,0 +1,11 @@
+{
+  "id": "106",
+  "name": "Claude Conversational Agent",
+  "model": "claude-sonnet-4-5",
+  "temperature": 0.7,
+  "responseTimeout": 120000,
+  "resultClass": "ContentResult",
+  "maxTokens": 4096,
+  "instructions": "You are Claude, a conversational AI assistant. Maintain context across messages and provide helpful, engaging responses. When asked to provide structured output, format your response as valid JSON matching the expected schema.",
+  "description": "Claude with conversation memory"
+}
