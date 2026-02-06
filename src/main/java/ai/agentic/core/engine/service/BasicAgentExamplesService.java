@@ -169,7 +169,7 @@ public class BasicAgentExamplesService {
         logger.info("Example 4: Direct Model Usage");
         logger.info("   Model: {}, Message: {}", model, message);
 
-        return agentService.requestAgent(model, message)
+        return agentService.requestModel(model, message)
                 .thenApply(result -> {
                     String response = result.getContent();
                     logger.info("   Response received (length: {} chars)", response.length());
@@ -194,7 +194,7 @@ public class BasicAgentExamplesService {
         logger.info("Example 5: Embedding Generation");
         logger.info("   Model: {}, Text length: {} chars", model, text.length());
 
-        return agentService.generateEmbedding(text, model)
+        return agentService.requestEmbedding(text, model)
                 .thenApply(embedding -> {
                     logger.info("   Embedding generated: {} dimensions", embedding.length);
                     return embedding;
@@ -259,7 +259,7 @@ public class BasicAgentExamplesService {
         logger.info("Example 7: Image Generation with DALL-E");
         logger.info("   Model: {}, Size: {}, Quality: {}", model, size, quality);
 
-        return agentService.generateImage(prompt, model, size, quality)
+        return agentService.requestImage(prompt, model, size, quality)
                 .thenApply(base64Image -> {
                     logger.info("   Image generated (base64 length: {} chars)", base64Image.length());
                     return base64Image;
@@ -382,7 +382,7 @@ public class BasicAgentExamplesService {
                         List.of("Hello, my name is Alice!", "What is my name?")).join();
                 results.append("   Messages exchanged: ").append(conversation.size()).append("\n\n");
 
-                // Example 4: Direct model
+                // Example 4: Direct model (uses requestModel instead of requestAgent)
                 results.append("4. Direct Model Usage:\n");
                 String direct = directModelRequest("gpt-4o", "What is 2+2?").join();
                 results.append("   Response: ").append(direct.substring(0, Math.min(100, direct.length()))).append("...\n\n");

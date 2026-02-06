@@ -1,6 +1,6 @@
 # Spring Boot AgentService Template
 
-A production-ready Spring Boot starter template with [agentic-helper](https://github.com/Yann-Favin-Leveque/agentic-helper) for multi-LLM orchestration. Build AI-powered applications with OpenAI, Azure OpenAI, and Azure Anthropic (Claude).
+A production-ready Spring Boot starter template with [agentic](https://github.com/Yann-Favin-Leveque/agentic) for multi-LLM orchestration. Build AI-powered applications with OpenAI, Azure OpenAI, and Azure Anthropic (Claude).
 
 ## Features
 
@@ -34,8 +34,8 @@ A production-ready Spring Boot starter template with [agentic-helper](https://gi
 ### 1. Clone the Template
 
 ```bash
-git clone https://github.com/Yann-Favin-Leveque/springboot-agentservice-template.git
-cd springboot-agentservice-template
+git clone https://github.com/Yann-Favin-Leveque/agentic-springboot-template.git
+cd agentic-springboot-template
 ```
 
 ### 2. Configure API Instances
@@ -155,38 +155,42 @@ curl -X POST http://localhost:8080/api/agents/reload
 @Autowired
 private AgentService agentService;
 
-// Simple request
-public String askAgent(String question) {
-    AgentResult result = agentService.requestAgent("200", question).join();
-    return result.getContent();
-}
+// Simple agent request
+AgentResult result = agentService.requestAgent("200", "What is AI?").join();
+String answer = result.getContent();
 
 // Structured output (agent with resultClass)
-public MyCustomResult askStructured(String question) {
-    AgentResult result = agentService.requestAgent("201", question).join();
-    return (MyCustomResult) result;
-}
+MyCustomResult typed = (MyCustomResult) agentService.requestAgent("201", question).join();
 
 // Direct model usage (no agent registration needed)
-public String askModel(String question) {
-    AgentResult result = agentService.requestAgent("gpt-4o", question).join();
-    return result.getContent();
-}
+AgentResult result = agentService.requestModel("gpt-4o", "What is 2+2?").join();
 
-// Conversation with memory
-public List<String> chat(List<String> messages) {
-    String conversationId = agentService.createConversation();
-    try {
-        List<String> responses = new ArrayList<>();
-        for (String msg : messages) {
-            AgentResult result = agentService.requestAgent("200", msg, conversationId).join();
-            responses.add(result.getContent());
-        }
-        return responses;
-    } finally {
-        agentService.deleteConversation(conversationId);
-    }
-}
+// Direct model with options (web search, structured output, images, etc.)
+AgentResult result = agentService.requestModel("gpt-4o", "Search for latest AI news",
+        ModelRequestOptions.withWebSearch()).join();
+
+// Conversation with automatic history
+String convId = agentService.createConversation();
+agentService.requestAgent("200", "My name is Alice", convId).join();
+agentService.requestAgent("200", "What's my name?", convId).join(); // remembers Alice
+agentService.deleteConversation(convId);
+
+// Embeddings
+float[] embedding = agentService.requestEmbedding("Hello world").join();
+float[] embedding = agentService.requestEmbedding("Hello world", "text-embedding-3-small").join();
+List<float[]> batch = agentService.requestEmbeddings(List.of("text1", "text2")).join();
+
+// Image generation (DALL-E)
+String base64Png = agentService.requestImage("A cat in space").join();
+
+// Chat completion (stateless, no agent needed)
+List<ChatMessage> msgs = List.of(
+        ChatMessage.SystemMessage.of("You are helpful"),
+        ChatMessage.UserMessage.of("Hello"));
+DefaultResult result = agentService.chatCompletion("gpt-4o", msgs, 0.7).join();
+
+// Autonomous agent with tool calling
+AgentResult result = agentService.requestAgent("207", "Research AI trends", toolExecutor).join();
 ```
 
 ## Agent JSON Configuration
@@ -401,7 +405,7 @@ mvn clean package
 
 ## Links
 
-- [agentic-helper Library](https://github.com/Yann-Favin-Leveque/agentic-helper)
+- [agentic Library](https://github.com/Yann-Favin-Leveque/agentic)
 - [Spring Boot Documentation](https://spring.io/projects/spring-boot)
 
 ## License
