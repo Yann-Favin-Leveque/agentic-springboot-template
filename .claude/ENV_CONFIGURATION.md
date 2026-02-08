@@ -52,8 +52,9 @@ LLM_INSTANCES=[{"id":"openai-main","url":"https://api.openai.com","key":"sk-proj
 ### Rate Limiting & Retry
 
 ```bash
-CONCURRENT_STREAM_LIMIT_PER_INSTANCE=15    # Concurrent stream limit per instance (default: 15)
-LLM_MAX_RETRIES=3             # Retry attempts (default: 3)
+LLM_REQUESTS_PER_SECOND=2          # Max API calls/sec per instance (default: 2)
+LLM_MAX_CONCURRENT_STREAMS=20     # Max concurrent HTTP/2 streams per instance (default: 20)
+LLM_MAX_RETRIES=3                  # Retry attempts (default: 3)
 LLM_DEFAULT_RESPONSE_TIMEOUT=120000  # Timeout in ms (default: 120000)
 ```
 
@@ -91,7 +92,7 @@ LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=INFO
 
 ```bash
 LLM_INSTANCES=[{"id":"dev","url":"https://api.openai.com","key":"sk-proj-XXX","models":"gpt-4o-mini","provider":"openai","enabled":true}]
-CONCURRENT_STREAM_LIMIT_PER_INSTANCE=5
+LLM_REQUESTS_PER_SECOND=2
 LOGGING_LEVEL_IO_GITHUB_YANNFAVINLEVEQUE_AGENTIC=DEBUG
 ```
 
@@ -99,7 +100,8 @@ LOGGING_LEVEL_IO_GITHUB_YANNFAVINLEVEQUE_AGENTIC=DEBUG
 
 ```bash
 LLM_INSTANCES=[{"id":"openai-1","url":"https://api.openai.com","key":"sk-XXX","models":"gpt-4o,text-embedding-3-small,dall-e-3","provider":"openai","enabled":true},{"id":"azure-gpt","url":"https://myresource.openai.azure.com","key":"XXX","models":"gpt-4o","provider":"azure-openai","apiVersion":"2024-08-01-preview","enabled":true},{"id":"claude","url":"https://myresource.services.ai.azure.com","key":"XXX","models":"claude-sonnet-4-5","provider":"azure-anthropic","apiVersion":"2023-06-01","enabled":true}]
-CONCURRENT_STREAM_LIMIT_PER_INSTANCE=50
+LLM_REQUESTS_PER_SECOND=10
+LLM_MAX_CONCURRENT_STREAMS=50
 LLM_MAX_RETRIES=5
 LOGGING_LEVEL_IO_GITHUB_YANNFAVINLEVEQUE_AGENTIC=INFO
 ```

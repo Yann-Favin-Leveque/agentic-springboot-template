@@ -25,8 +25,11 @@ public class AgentServiceConfiguration {
     @Value("${llm.instances:[]}")
     private String instancesJson;
 
-    @Value("${llm.concurrent.stream.limit.per.instance:15}")
-    private int concurrentStreamLimitPerInstance;
+    @Value("${llm.requests.per.second:2}")
+    private int requestsPerSecond;
+
+    @Value("${llm.max.concurrent.streams:20}")
+    private int maxConcurrentStreams;
 
     @Value("${llm.max.retries:3}")
     private int maxRetries;
@@ -38,7 +41,8 @@ public class AgentServiceConfiguration {
     public AgentService agentService() {
         AgentServiceConfig config = AgentServiceConfig.builder()
                 .instancesJson(instancesJson)
-                .requestsPerSecond(concurrentStreamLimitPerInstance)
+                .requestsPerSecond(requestsPerSecond)
+                .maxConcurrentStreamsPerInstance(maxConcurrentStreams)
                 .maxRetries(maxRetries)
                 .defaultResponseTimeout(defaultResponseTimeout)
                 .agentJsonFolderPath("src/main/resources/agents")
@@ -57,7 +61,8 @@ public class AgentServiceConfiguration {
 | Parameter | Property | Default | Description |
 |-----------|----------|---------|-------------|
 | `instancesJson` | `llm.instances` | `[]` | JSON array of provider instances |
-| `requestsPerSecond` | `llm.concurrent.stream.limit.per.instance` | `15` | Concurrent stream limit per instance |
+| `requestsPerSecond` | `llm.requests.per.second` | `2` | Max API calls per second per instance |
+| `maxConcurrentStreamsPerInstance` | `llm.max.concurrent.streams` | `20` | Max concurrent HTTP/2 streams per instance |
 | `maxRetries` | `llm.max.retries` | `3` | Retry attempts on transient failure |
 | `defaultResponseTimeout` | `llm.default.response.timeout` | `120000` | Default timeout in ms |
 | `agentJsonFolderPath` | hardcoded | `src/main/resources/agents` | Agent JSON definitions folder |
@@ -70,7 +75,8 @@ public class AgentServiceConfiguration {
 | Field | Type | Description |
 |-------|------|-------------|
 | `instancesJson` | String | JSON array of API instances |
-| `requestsPerSecond` | int | Concurrent stream limit per instance across all instances |
+| `requestsPerSecond` | int | Max API calls per second per instance |
+| `maxConcurrentStreamsPerInstance` | int | Max concurrent HTTP/2 streams per instance |
 | `maxRetries` | int | Max retry attempts |
 | `defaultResponseTimeout` | long | Default timeout (ms) |
 | `agentJsonFolderPath` | String | Path to agent JSON folder |
@@ -143,7 +149,7 @@ public class MyService {
 |-------|-------|----------|
 | `Failed to parse instancesJson` | Invalid JSON in `LLM_INSTANCES` | Validate JSON syntax |
 | `No instances configured` | Empty `LLM_INSTANCES` | Set env variable in `.env` |
-| `RateLimitError` | Too many requests | Increase `CONCURRENT_STREAM_LIMIT_PER_INSTANCE` or add instances |
+| `RateLimitError` | Too many requests | Increase `LLM_REQUESTS_PER_SECOND` or add instances |
 
 ---
 
