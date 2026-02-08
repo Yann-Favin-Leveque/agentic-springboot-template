@@ -24,9 +24,8 @@ Configuration:
 Set up your environment with LLM_INSTANCES JSON array in .env file.
 Each instance requires: id, url, key, models, provider, and apiVersion (for Azure).
 
-Stream Limits:
-Configure CONCURRENT_STREAM_LIMIT_PER_INSTANCE in .env file.
-Default is 15 concurrent streams per instance.
+Rate Limiting:
+Configure LLM_REQUESTS_PER_SECOND (default: 2) and LLM_MAX_CONCURRENT_STREAMS (default: 20) in .env file.
 
 Best Practices:
 - Use structured outputs for data extraction and classification

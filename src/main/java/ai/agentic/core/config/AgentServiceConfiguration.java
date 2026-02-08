@@ -29,8 +29,11 @@ public class AgentServiceConfiguration {
     @Value("${llm.instances:[]}")
     private String instancesJson;
 
-    @Value("${llm.concurrent.stream.limit.per.instance:15}")
-    private int concurrentStreamLimitPerInstance;
+    @Value("${llm.requests.per.second:2}")
+    private int requestsPerSecond;
+
+    @Value("${llm.max.concurrent.streams:20}")
+    private int maxConcurrentStreams;
 
     @Value("${llm.max.retries:3}")
     private int maxRetries;
@@ -44,7 +47,8 @@ public class AgentServiceConfiguration {
 
         AgentServiceConfig config = AgentServiceConfig.builder()
                 .instancesJson(instancesJson)
-                .requestsPerSecond(concurrentStreamLimitPerInstance)
+                .requestsPerSecond(requestsPerSecond)
+                .maxConcurrentStreamsPerInstance(maxConcurrentStreams)
                 .maxRetries(maxRetries)
                 .defaultResponseTimeout(defaultResponseTimeout)
                 .agentJsonFolderPath("src/main/resources/agents")
@@ -54,8 +58,8 @@ public class AgentServiceConfiguration {
         AgentService agentService = new AgentService(config);
 
         logger.info("AgentService initialized successfully");
-        logger.info("   Instances: {}, Stream limit/instance: {}, Max retries: {}",
-                agentService.getInstanceCount(), concurrentStreamLimitPerInstance, maxRetries);
+        logger.info("   Instances: {}, Requests/sec: {}, Max streams: {}, Max retries: {}",
+                agentService.getInstanceCount(), requestsPerSecond, maxConcurrentStreams, maxRetries);
         logger.info("   Available models: {}", agentService.getAvailableModels());
 
         return agentService;

@@ -291,7 +291,8 @@ server.port=8080
 
 # LLM instances (JSON array from .env)
 llm.instances=${LLM_INSTANCES:[]}
-llm.concurrent.stream.limit.per.instance=${CONCURRENT_STREAM_LIMIT_PER_INSTANCE:15}
+llm.requests.per.second=${LLM_REQUESTS_PER_SECOND:2}
+llm.max.concurrent.streams=${LLM_MAX_CONCURRENT_STREAMS:20}
 llm.max.retries=${LLM_MAX_RETRIES:3}
 llm.default.response.timeout=${LLM_DEFAULT_RESPONSE_TIMEOUT:120000}
 
@@ -307,7 +308,8 @@ management.endpoints.web.exposure.include=health,prometheus,metrics
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `LLM_INSTANCES` | `[]` | JSON array of provider instances |
-| `CONCURRENT_STREAM_LIMIT_PER_INSTANCE` | `15` | Concurrent stream limit per instance |
+| `LLM_REQUESTS_PER_SECOND` | `2` | Max API calls per second per instance |
+| `LLM_MAX_CONCURRENT_STREAMS` | `20` | Max concurrent HTTP/2 streams per instance |
 | `LLM_MAX_RETRIES` | `3` | Retry attempts on failure |
 | `LLM_DEFAULT_RESPONSE_TIMEOUT` | `120000` | Default timeout (ms) |
 | `ASYNC_POOL_SIZE` | `30` | Thread pool size |
