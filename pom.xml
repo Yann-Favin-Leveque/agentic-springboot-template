@@ -70,7 +70,7 @@
 
         <!-- Agentic Helper (AI/LLM orchestration library) -->
         <dependency>
-            <groupId>io.github.Yann-Favin-Leveque</groupId>
+            <groupId>io.github.yann-favin-leveque</groupId>
             <artifactId>agentic-helper</artifactId>
             <version>1.6.8</version>
             <exclusions>
