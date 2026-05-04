@@ -68,6 +68,6 @@ frontend/dist/
 .docker/
 
 # Claude Code local settings
-.claude/settings.local.json
+.claude/
 log.txt
 First_Prompt*.txt
