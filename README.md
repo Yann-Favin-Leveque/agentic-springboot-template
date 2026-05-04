@@ -1,6 +1,10 @@
 # Spring Boot AgentService Template
 
-A production-ready Spring Boot starter template with [agentic](https://github.com/Yann-Favin-Leveque/agentic) for multi-LLM orchestration. Build AI-powered applications with OpenAI, Azure OpenAI, and Azure Anthropic (Claude).
+[![Java 17](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)
+[![Spring Boot 3.4.2](https://img.shields.io/badge/Spring%20Boot-3.4.2-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+A production-ready Spring Boot starter template with [agentic-helper](https://github.com/Yann-Favin-Leveque/agentic-helper) for multi-LLM orchestration. Build AI-powered applications with OpenAI, Azure OpenAI, and Azure Anthropic (Claude).
 
 ## Features
 
@@ -17,7 +21,7 @@ A production-ready Spring Boot starter template with [agentic](https://github.co
 ## Tech Stack
 
 - **Backend**: Spring Boot 3.4.2, Java 17, Maven
-- **AI/LLM**: agentic-helper v1.5.2 (AgentService)
+- **AI/LLM**: agentic-helper v1.6.8 (AgentService)
 - **Frontend**: Vite 5, React 18, TypeScript
 - **Monitoring**: Spring Actuator, Prometheus metrics
 - **Config**: spring-dotenv 4.0.0
@@ -195,7 +199,7 @@ AgentResult result = agentService.requestAgent("207", "Research AI trends", tool
 
 ## Agent JSON Configuration
 
-### Valid Fields (v1.5.2)
+### Valid Fields (v1.6.8)
 
 | Field | Required | Default | Description |
 |-------|----------|---------|-------------|
